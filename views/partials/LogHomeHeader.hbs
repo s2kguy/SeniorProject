@@ -1,0 +1,42 @@
+ <!--NAVBAR BEGINS-->
+  <nav class="navbar navbar-expand-sm navbar-toggleable-md bg-dark navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/Member/Home">Wholly Smokin' Downtown</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse navbar-right" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user" aria-hidden="true"></i> {{user.f_Name}}'s Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/Shopping-Cart">View Cart</a>
+                        <a class="dropdown-item" href="#">View Order History</a>
+                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Logout">Logout</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Menu/Home">Menu</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Member/Spirits">Spirits</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="/Member/Events">Events</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="/Member/AboutUs">About Us</a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+ <!--NAVBAR ENDS-->

@@ -1,0 +1,67 @@
+
+
+<hr><hr><hr><hr><hr><hr><hr><hr><hr>
+
+
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<section id="customizeItemSection" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3 col-xl-3">
+                <img src="{{item.imgURL}}" alt="" class="img-fluid mb-3">
+            </div>
+
+            <div class="col-xs-2 col-sm-8 col-md-6 col-lg-6 col-xl-6">
+                <div class="card text-white bg-dark mb-3" style="max-width: 40rem;">
+                    <div class="card-body">
+                        <form class="px-4 py-3" action="" method="post" id="spiritsContainer">
+                            
+                                <h1>{{item.name}}<h1>
+                                {{#if item.description}}
+                                    <h3>{{item.description}}</h3><
+                                {{/if}}
+                            
+                            {{#if item.options}}
+                                <div class="btn-group" data-toggle="buttons">
+                                   <!-- {{#each item.options}}-->
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="choice" value="sandOnly" id="choice-sandOnly"> 
+                                            {{this.title}}       ${{this.price}}
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="choice" value="sandOnly" id="choice-combo"> 
+                                            {{this.title}}       ${{this.price}}
+                                        </label>
+                                    <!--  {{/each}} -->
+                                 </div>
+                            {{/if}}
+                            <div class="reveal-if-active"  data-require-pair="#choice-combo">
+                                <select class="require-if-active">
+                                    <option selected>Select Side Item</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                            <!--input type="hidden" name="_csrf" value="{{csrfToken}}"-->
+
+                            <a href="" class="btn btn-secondary">Add to Cart</a>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3 col-xl-3">
+                <img src="" alt="" class="img-fluid mb-3 rounded-circle">
+            </div>
+        </div>
+    </div>
+</section>
+

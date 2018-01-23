@@ -1,0 +1,91 @@
+body {
+  background: #211F20;
+  color: #fff; }
+
+footer{
+  background: #211F20;
+  color: #fff; }
+
+.navbar {
+  border-bottom: #BA1E22 3px solid;
+  opacity: 0.8; }
+
+#home-section, #menuHome {
+  background: url("../img/home_section.jpg") no-repeat;
+  min-height: 700px;
+  background-size: cover;
+  background-attachment: fixed; }
+  #home-section .dark-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 700px; }
+  #home-section .home-inner {
+    padding-top: 150px; }
+  #home-section .fa {
+    color: #008ed6;
+    background: #fff;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 30px; }
+
+#menu-section .fa {
+    color: #fff;
+    background: #211F20;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 30px; }
+
+#menu-section {
+  background: url("../img/events-section 2.jpg") no-repeat;
+  min-height: 500px;
+  background-size: cover;
+  background-attachment: fixed; 
+  color: #fff;}
+
+#spirits-section .fa, #main-footer .fa  {
+  color: #fff;
+  background: #211F20;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px; }
+
+  #spirits-section {
+    background: url("../img/bar-view.jpg") no-repeat;
+    min-height: 500px;
+    background-size: cover;
+    background-attachment: fixed; 
+    color: #fff;
+  }
+
+#events-section .fa,  {
+  color: #fff;
+  background: white;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px; }
+
+  #events-section {
+    background: url("../img/events_section_sample.jpg") no-repeat;
+    min-height: 500px;
+    background-size: cover;
+    background-attachment: fixed; 
+    color: #fff;
+  }
+
+#about-section .fa,  {
+  color: white;
+  background: #211F20;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px; }
+
+  #about-section {
+    background: url("../img/about_section_sample.jpeg") no-repeat;
+    min-height: 500px;
+    background-size: cover;
+    background-attachment: fixed; 
+    color: #fff;
+  }

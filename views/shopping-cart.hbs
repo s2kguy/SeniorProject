@@ -1,0 +1,53 @@
+<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+<div class="container" >
+    <h1 id="spiritsContainer">Shopping-Cart</h1>
+
+{{#if products}}
+    <div class="row" id="cartItem">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <ul class="list-group">
+                {{#each products}}
+                    <li class="list-group-item">
+                        <div>
+                        <strong>{{this.item.name}}</strong>
+                        <span class="badge">Qty: {{this.qty}}</span>
+                        <span class="label label-success">${{this.price}}</span>
+                        </div>
+                        <div class="bth-group">
+                            <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                                Action
+                                <span class="carot"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                <a class="dropdown-item" href="/Menu/reduce/{{this.item._id}}">Reduce by 1</a>
+                                <a class="dropdown-item" href="/Menu/remove/{{this.item._id}}">Remove All</a>
+                             </li>
+                           
+                            </ul>
+                        </div>
+                    </li>
+                {{/each}}  
+            </ul>
+        </div>
+    </div>
+
+    <div class="row" id="spiritsContainer">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">
+            <strong>Total: ${{totalPrice}}</strong>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">
+            <button type="button" class="btn btn-success">Checkout</button>
+        </div>
+    </div>
+{{else}}
+    <div class="row" id="spiritsContainer">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">
+            <h2>No Items in Cart</h2>
+        </div>
+    </div>
+{{/if}}
+</div>
