@@ -101,7 +101,7 @@ body {
         color: #fff;
     }
 
-    #liquor-head-section, #beer-head-section, #wine-head-section{
+    #liquor-head-section, #beer-head-section, #wine-head-section, #EventsFeatured-head-section{
       color: #fff;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -143,6 +143,25 @@ body {
       color: #fff;
     }
 
+    #EventsFeatured-section{
+      background: url("../images/upcomingEventsBack.JPG") no-repeat;
+      min-height: 500px;
+      text-shadow: 2px 2px 4px #000000;
+      background-size: cover;
+      background-attachment: fixed; 
+      color: #fff;
+
+    }
+
+    #EventsHeader-section{
+      background: url("../images/bar-view.jpg") no-repeat;
+      min-height: 400px;
+      text-shadow: 2px 2px 4px #000000;
+      background-size: cover;
+      background-attachment: fixed; 
+      color: #fff;
+    }
+
     #carouselCard{
       text-shadow: 2px 2px 4px #000000;
       box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1), 0 14px 20px 0 rgba(0, 0, 0, 0.0);
@@ -151,6 +170,11 @@ body {
 
     #carousel-inner{
       box-shadow: 0 100px 20px 0 rgba(255, 255, 255, 0.1), 0 14px 20px 0 rgba(70, 63, 63, 0);
+    }
+
+    #Calendar-section{
+      min-height: 500px;
+      background: url("../images/bourbon2.jpg") no-repeat;
     }
   
   
