@@ -18,10 +18,7 @@ var menu_itemSchema = Schema({
         type: String
     },
 
-   // optionTitle:[String],
-   // optionPrice:[Number],
-
-    options: [{title: String,  price: Number}],
+    price: {type: Number},
 
     imgURL: {type: String}
   

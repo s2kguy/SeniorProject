@@ -54,7 +54,7 @@ router.post('/CreateAccount', passport.authenticate('local.signup', {
 router.get('/Member/Sign-In', notLoggedIn, function(req, res, next){
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   var messages = req.flash('error');
-  res.render('signIn', {title: 'Wholly Smokin-Sign In', layout: 'nLogInfoLayout', extname: '.hbs', csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
+  res.render('signIn', {title: 'Pork Store-Sign In', layout: 'nLogInfoLayout', extname: '.hbs', csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
  });
 
 
@@ -63,21 +63,6 @@ router.get('/Member/Sign-In', notLoggedIn, function(req, res, next){
   console.log(req.session);
   res.render('userProfile', {title: 'Wholly Smokin-User Profile', user: req.user, layout: 'LogInfoLayout', extname: '.hbs'});
  });
-
-
-/*router.get('/Member/UpdateProfile', function(req, res, next) {
-    User.update({_id: res.locals.session.id}, {
-        fName: req.body.fName,
-        lName: req.body.lname,
-        phoneNum: req.body.phoneNumber,
-        birthday: req.body.bday
-    }, function (err){
-        if(err){
-          console.log(err);
-        }
-        res.redirect('/Member/Profile'); 
-    });
-}); */
 
  router.post('/Member/Sign-In', passport.authenticate('local.signin', {
   successRedirect: '/Member/Home',

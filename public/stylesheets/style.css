@@ -177,4 +177,22 @@ body {
       background: url("../images/bourbon2.jpg") no-repeat;
     }
   
-  
+  #part1-head-section, #part2-head-section, #part3-head-section, #part4-head-section, #part5-head-section, #part6-head-section, #AboutHeader-section{
+    color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  #AB_Card{
+   
+   padding: 10px;
+    color: #fff;
+  }
+
+  #part2-section, #part3-section, #part4-section, #part5-section, #part6-section{
+    background: url("../images/bar-view.jpg") no-repeat;
+    min-height: 400px;
+    text-shadow: 2px 2px 4px #000000;
+    background-size: cover;
+    background-attachment: fixed; 
+    color: #fff;
+  }
