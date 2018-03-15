@@ -3,9 +3,14 @@
  *************************/
 module.exports = function Cart(oldCart) { // receives old Cart
     // assign values of old cart to new cart
+    var taxRate = 0.105;
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
+    this.tax = oldCart.tax || 0;
+    this.subTotal = oldCart.subTotal || 0;
+    
+    
     // ADD ITEM TO THE CART
     this.add = function(item, id) {
         // Assigns id and checks to see if the item is in the cart
@@ -18,14 +23,19 @@ module.exports = function Cart(oldCart) { // receives old Cart
         storedItem.qty++;                                           
         storedItem.price = storedItem.item.price * storedItem.qty;
         this.totalQty++;
-        this.totalPrice += storedItem.item.price;
+        this.subTotal += storedItem.price;
+        this.tax = taxRate*this.subTotal;
+        this.totalPrice = this.subTotal + this.tax;
+        console.log(Cart);
     };
     // REDUCE ITEM QUANTITY BY ONE
     this.reduceByOne = function(id){
         this.items[id].qty--;
         this.items[id].price -= this.items[id].item.price;
         this.totalQty--;
-        this.totalPrice -= this.items[id].item.price;
+        this.subTotal -= this.items[id].item.price;
+        this.tax = taxRate*this.subTotal;
+        this.totalPrice = this.subTotal + this.tax;
 
         if(this.items[id].qty <= 0){
             delete this.items[id];
@@ -34,7 +44,9 @@ module.exports = function Cart(oldCart) { // receives old Cart
     // REMOVE ITEM FROM CART
     this.removeItem = function(id){
         this.totalQty -= this.items[id].qty;
-        this.totalPrice -= this.items[id].price;
+        this.subTotal -= this.items[id].price;
+        this.tax = taxRate * this.subTotal;
+        this.totalPrice = this.subTotal + this.tax;
         delete this.items[id];
     }
     // RETURNS CART OBJECT AS ARRAY

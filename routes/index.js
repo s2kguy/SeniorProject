@@ -101,10 +101,10 @@ router.get('/Member/AboutUs', isLoggedIn, function(req, res, next){
 router.get('/Shopping-Cart', function(req, res, next){
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   if(!req.isAuthenticated()){
-    res.render('shopping-cart', {title: 'Wholly Smokin-Cart', products: cart.generateArray(), totalPrice: cart.totalPrice, layout: 'nLogInfoLayout', extname: '.hbs'});
+    res.render('shopping-cart', {title: 'Wholly Smokin-Cart', products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'nLogInfoLayout', extname: '.hbs'});
   }
   if(req.isAuthenticated()){
-    res.render('shopping-cart', {title: 'Wholly Smokin-Cart', user: req.user, products: cart.generateArray(), totalPrice: cart.totalPrice, layout: 'LogInfoLayout', extname: '.hbs'});
+    res.render('shopping-cart', {title: 'Wholly Smokin-Cart', user: req.user, products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'LogInfoLayout', extname: '.hbs'});
   }
 });
 
