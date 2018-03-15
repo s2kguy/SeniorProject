@@ -24,5 +24,4 @@ var menu_itemSchema = Schema({
   
 });
 
-//var MenuItems = module.exports = mongoose.model('menuItems', menu_itemSchema);
 var MenuItems = module.exports = mongoose.model('itemTest2', menu_itemSchema);

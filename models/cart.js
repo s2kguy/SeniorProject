@@ -6,10 +6,12 @@ module.exports = function Cart(oldCart) { // receives old Cart
     var taxRate = 0.105;
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
-    this.totalPrice = oldCart.totalPrice || 0;
     this.tax = oldCart.tax || 0;
     this.subTotal = oldCart.subTotal || 0;
-    
+    this.totalPrice = oldCart.totalPrice || 0;
+   
+
+     
     
     // ADD ITEM TO THE CART
     this.add = function(item, id) {
@@ -17,13 +19,14 @@ module.exports = function Cart(oldCart) { // receives old Cart
         var storedItem = this.items[id]; 
         // If this item does not exist in the cart, then create a new one
         if(!storedItem) { 
-            storedItem = this.items[id] = {item: item, qty: 0, price: 0};
+            storedItem = this.items[id] = {item: item, qty: 0, price: 0.00};
         }
         // Update Item Quantity, Item Price with Quantity, Total Cart Quantity, and Total Cart Price
         storedItem.qty++;                                           
         storedItem.price = storedItem.item.price * storedItem.qty;
         this.totalQty++;
         this.subTotal += storedItem.price;
+        
         this.tax = taxRate*this.subTotal;
         this.totalPrice = this.subTotal + this.tax;
         console.log(Cart);
@@ -36,10 +39,11 @@ module.exports = function Cart(oldCart) { // receives old Cart
         this.subTotal -= this.items[id].item.price;
         this.tax = taxRate*this.subTotal;
         this.totalPrice = this.subTotal + this.tax;
-
+        console.log(Cart);
         if(this.items[id].qty <= 0){
             delete this.items[id];
         }
+        
     };
     // REMOVE ITEM FROM CART
     this.removeItem = function(id){
@@ -47,7 +51,9 @@ module.exports = function Cart(oldCart) { // receives old Cart
         this.subTotal -= this.items[id].price;
         this.tax = taxRate * this.subTotal;
         this.totalPrice = this.subTotal + this.tax;
+        console.log(this.subTotal);
         delete this.items[id];
+       
     }
     // RETURNS CART OBJECT AS ARRAY
     this.generateArray = function() {
@@ -56,5 +62,10 @@ module.exports = function Cart(oldCart) { // receives old Cart
             arr.push(this.items[id]);
         }
         return arr;
-    };
+    }; 
+
+    this.tax = this.tax.toFixed(2);
+  //  this.subTotal = this.subTotal.toFixed(2);
+  //  this.totalPrice = this.totalPrice.toFixed(2); 
+
 };
