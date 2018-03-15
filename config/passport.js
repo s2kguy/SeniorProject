@@ -2,6 +2,8 @@ var passport = require('passport');
 var User = require('../models/user');
 var LocalStrategy = require('passport-local').Strategy;
 
+
+// Serializing (writting) the User Data to the User Session
 passport.serializeUser(function(user, done){
     done(null, user.id);
 });
@@ -14,7 +16,6 @@ passport.deserializeUser(function(id, done){
 
 // Sign-Up Strategy to Create a New User
 passport.use('local.signup', new LocalStrategy({
-   
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -25,7 +26,6 @@ passport.use('local.signup', new LocalStrategy({
     var phoneNumber = req.body.phoneNumber;
     var createDate = Date.now; 
     
-  
     // Validating User input Email and Password using Express-Validator
     req.checkBody('fName', 'First Name is required').notEmpty();
     req.checkBody('lName', 'First Name is required').notEmpty();
