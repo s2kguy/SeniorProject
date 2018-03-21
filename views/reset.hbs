@@ -23,19 +23,8 @@
                 <div class="card text-white bg-dark mb-5">
                     <div class="card-body">
                         <h4 class="card-title text-center">Welcome, New Memeber!</h4>
-                        <form class="px-2 py-2" action="/CreateAccount" method="post" id="spiritsContainer">
-                            <div class="form-group">
-                                <!--label for="fName">First Name</label-->
-                                <input type="text" class="form-control" id="fName" name="fName" placeholder="First Name">
-                            </div>
-                            <div class="form-group">
-                                <!--label for="fName">Last Name</label-->
-                                <input type="text" class="form-control" id="lName" name="lName" placeholder="Last Name">
-                            </div>
-                            <div class="form-group">
-                                <!--label for="exampleDropdownFormEmail1">Email Address</label-->
-                                <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com">
-                            </div>
+                        <form class="px-2 py-2" action="/reset/{{resetPasswordToken}}"" method="post" id="spiritsContainer">
+                           
                             <div class="form-group">
                                 <!--label for="exampleDropdownFormPassword1">Password</label-->
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
@@ -44,17 +33,9 @@
                                 <!--label for="exampleDropdownFormPassword2">Confirm Password</label-->
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
                             </div>
-                            <div class="form-group">
-                                <!--label for="bDay">Birthday</label-->
-                                <input type="text" name="bday" placeholder="DD/MM/YYYY">
-                            </div>
-                            <div class="form-group">
-                                <!--label for="phonenumber">Phone Number</label-->
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="(843)123-4567">
-                            </div>
-
+                           
                             <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                            <button type="submit" class="btn btn-primary">Create Account</button>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
 
                         </form>
                     </div>

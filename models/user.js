@@ -13,7 +13,6 @@ var userSchema = new Schema({
 
     birthday:{type: String, default: ''},
   
-
     email:{
         type: String,
         required: true,
@@ -27,8 +26,11 @@ var userSchema = new Schema({
 
     create_date:{
         type: Date,
-        defualt: Date.now
-    } 
+        defualt: Date.now(),
+    },
+    resetPasswordToken: String,
+
+    resetPasswordExpires: Date
 
 });
 

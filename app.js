@@ -13,6 +13,9 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session); 
+var async = require('async');
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
 
 var index = require('./routes/index');
 var menu = require('./routes/menu');
