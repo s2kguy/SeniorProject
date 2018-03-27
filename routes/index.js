@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
@@ -8,6 +9,7 @@ var User = require('../models/user');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+var objectId = require('mongodb').ObjectID;
 
 var csrfProtection = csrf();
 
@@ -65,11 +67,7 @@ router.get('/ForgotPassword', notLoggedIn, function (req, res) {
 
 // FORGOT PASSWORD ROUTE
 router.post('/ForgotPassword', function (req, res, next) {
-
-  console.log('Post(ForgotPassword) Called');
-
   async.waterfall([
-
     function (done) {
       crypto.randomBytes(20, function (err, buf) {
         var token = buf.toString('hex');
@@ -128,7 +126,6 @@ router.get('/reset/:token', function (req, res, next) {
       req.flash('error', 'Password reset token is invalid or has expired.');
       return res.redirect('/ForgotPassword');
     }
-    console.log('User found in the GET /reset/:token call...')
     res.render('reset', {
       title: 'Reset Password', layout: 'nLogInfoLayout', extname: '.hbs',
       csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, 
@@ -140,12 +137,17 @@ router.get('/reset/:token', function (req, res, next) {
 
 router.post('/reset/:token', function (req, res) {
   async.waterfall([
+    
     function (done) {
-      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } },
-       function (err, user) {
+      User.findOne(
+      { 
+          resetPasswordToken: req.params.token, 
+          resetPasswordExpires: { $gt: Date.now() }
+      },
+      function (err, user) {
         if (!user) {
           req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('/ForgotPassword');
+          return res.redirect('/ForgotPassword');
         }
         var _password = req.body.password;
         var _confirmPass = req.body.confirmPassword;
@@ -200,6 +202,147 @@ router.post('/reset/:token', function (req, res) {
   });
 });
 
+// ROUTE TO SEND AN EMAIL FROM THE FOOTER
+//
+//      Model id=contactModal
+//
+router.get('/SendMessage', function (req, res) {
+  req.checkBody('name', 'Please enter your name.')
+        .notEmpty().isLength({ min: 1 });
+ console.log(req.params.name);
+ 
+ /* async.waterfall([
+  
+    function(req, userEmail){
+      console.log('Second Function of the waterfall');
+      // Get and Validate Form Values
+      var name = req.body.name;
+      var email = req.body.email;
+      var message = req.body.message;
+      req.checkBody('name', 'Please enter your name.')
+        .notEmpty().isLength({ min: 1 });
+      req.checkBody('email', 'Please enter an email address.')
+        .notEmpty().isEmail();
+      req.checkBody('message', 'Your message must contain at least 15 characters.')
+        .notEmpty().isLength({ min: 15 });
+      // Create an Object
+      var userEmail = { name: name, email: email, message: message};
+      console.log(userEmail);
+      return this.userEmail;
+   }, 
+   function(userEmail, done){
+    console.log('Third Function of the waterfall');
+      // Initialize the Email Service
+      let smtpTransport, mailOptions_Responce, mailOptions_User;
+      smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'porkstoretestemail@gmail.com',
+          pass: '1012321805'
+        }
+      });
+      console.log('Email Service Initialized\n'+smtpTransport);
+      // Create the Email Objects
+      mailOptions_Responce = {
+        to: req.body.email,
+        from: 'porkstoretestemail@gmail.com',
+        subject: 'Thank you for your email!',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + req.body.email + ' has just been changed.\n'
+      };
+      mailOptions_User = {
+        to: 'porkstoretestemail@gmail.com',
+        from: req.body.email,
+        subject: 'A message from ' + req.body.name,
+        text: req.body.message
+      };
+      console.log('Email Objects Created\n'+mailOptions_Responce+'\n'+mailOptions_User);
+      // Send the Emails
+      smtpTransport.sendMail(mailOptions_Responce, function (err) {
+        console.log('Automatic Responce Email Sent');
+        req.flash('error', 'Success! Your password has been changed. Please sign-in with your new password.');
+        done(err);
+      });
+      smtpTransport.sendMail(mailOptions_User, function (err) {
+        console.log('User Email Sent');
+        req.flash('error', 'Success! Your message has been sent.');
+        done(err);
+      });
+    }
+  ], function (err) {
+      res.redirect('/');
+    });
+ // console.log('Waterfall complete'); */
+ res.redirect('/');
+});
+
+
+//   User will Click 
+router.post('/SendMessage', function(req, res){
+  async.waterfall([
+
+    function (done) {
+      // Get and Validate Form Values
+      var name = req.body.name;
+      var email = req.body.email;
+      var message = req.body.message;
+      req.checkBody('name', 'Please enter your name.')
+        .notEmpty().isLength({ min: 1 });
+      req.checkBody('email', 'Please enter an email address.')
+        .notEmpty().isEmail();
+      req.checkBody('message', 'Your message must contain at least 15 characters.')
+        .notEmpty().isLength({ min: 15 });
+      // Create an Object to pass
+      var userEmail = [name, email, message];
+      // Return and Pass the Object
+      return done(null, userEmail);
+    },
+    function (userEmail, done) {
+      // Initialize the Email Service
+      let smtpTransport, mailOptions_Responce, mailOptions_User;
+      smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'porkstoretestemail@gmail.com',
+          pass: '1012321805'
+        }
+      });
+      console.log('Email Service Initialized');
+      // Create the Email Objects
+      mailOptions_Responce = {
+        to: userEmail.email,
+        from: 'porkstoretestemail@gmail.com',
+        subject: 'Thank you for your email!',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + userEmail.email + ' has just been changed.\n'
+      };
+      mailOptions_User = {
+        to: 'porkstoretestemail@gmail.com',
+        from: email,
+        subject: 'A message from ' + userEmail.name,
+        text: userEmail.message
+      };
+      console.log('Email Objects Created');
+      // Send the Emails
+      smtpTransport.sendMail(mailOptions_Responce, function (err) {
+        console.log('Automatic Responce Email Sent');
+        req.flash('error', 'Success! Your password has been changed. Please sign-in with your new password.');
+        done(err);
+      });
+      smtpTransport.sendMail(mailOptions_User, function (err) {
+        console.log('User Email Sent');
+        req.flash('error', 'Success! Your message has been sent.');
+        done(err);
+      });
+    }
+  ],
+  function (err, success) {
+    if (err) console.log('something went wrong');
+    res.redirect('/', { csrfToken: req.csrfToken()});
+  });
+});
+
+
 /************************
  *  SIGN-IN VIEW ROUTES *
  ************************/
@@ -213,7 +356,6 @@ router.get('/Member/Sign-In', notLoggedIn, function (req, res, next) {
 
 router.get('/Member/Profile', isLoggedIn, function (req, res, next) {
   var messages = req.flash('error');
-  console.log(req.session);
   res.render('userProfile', { title: 'Wholly Smokin-User Profile', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
 });
 
@@ -222,6 +364,20 @@ router.post('/Member/Sign-In', passport.authenticate('local.signin', {
   failureRedirect: '/Member/Sign-In',
   failureFlash: true
 }));
+
+router.get('/Delete/:id', isLoggedIn, function(req, res){
+  let id = req.params.id;
+  console.log(id);
+
+  User.deleteOne({'_id': id}, function(err, blah){
+    if(err){
+      res.redirect('/');
+    }else{
+      res.redirect('/Logout');
+    }
+  });
+
+});
 
 router.get('/Logout', function (req, res, next) {
   req.logout();

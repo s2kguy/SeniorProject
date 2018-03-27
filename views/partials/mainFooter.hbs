@@ -24,23 +24,27 @@
                 </h5>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/SendMessage" method="get">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control">
+        
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control">
+           
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" id="message" name="message" placeholder="Please type out your message here."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                         <button class="btn btn-primary btn-block" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-block">Submit</button>
+               <p>Think of something</p>
             </div>
         </div>
     </div>

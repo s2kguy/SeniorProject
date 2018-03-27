@@ -20,7 +20,8 @@ passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
-}, function (req, email, password, done) {
+}, 
+function (req, email, password, done) {
     var fName = req.body.fName;
     var lName = req.body.lName;
     var bday = req.body.bday;
