@@ -12,7 +12,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (id, done) {
     User.findById(id, function (err, user) {
         done(err, user);
-    })
+    });
 });
 
 // Sign-Up Strategy to Create a New User
@@ -79,7 +79,7 @@ function (req, email, password, done) {
             }
             return done(null, newUser);
         });
-    })
+    });
 }));
 
 
@@ -114,7 +114,7 @@ passport.use('local.signin', new LocalStrategy({
             return done(null, false, { message: 'Wrong password.' });
         }
         return done(null, user);
-    })
+    });
 }));
 
 

@@ -1,52 +1,21 @@
 <!-- MAIN FOOTER BEGINS-->
-<footer id="main-footer" class="bg-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <div class="py-4">
-                    <h1 class="h3">Wholly Smokin' Downtown</h1>
-                    <p>Copyright &copy; 2017</p>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#contactModal">Contact Us</button>
-                </div>
-            </div>
+<footer id="main-footer" class="container-fluid bg-dark">
+
+    <div class="row text-center" style="align-items: center;">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 quickLink">
+            <p>Quicklinks</p>
+            <a href="/SendMessage" action="get">Contact Us</a>
+            <a href="/Member/Spirits">Spirits</a>
+            <a href="/Member/Events">Events</a>
+            <a href="/Member/AboutUs">About Us</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <h4>Pork Store</h4>
+            <p>SGD Designs; 2017</p>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+
         </div>
     </div>
 </footer>
 <!-- MAIN FOOTER ENDS-->
-
-<!-- FOOTER CONTACT MODAL BEGINGS-->
-<div class="modal fade text-dark" id="contactModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="contactModalTitle">
-                    Contact Us
-                </h5>
-            </div>
-            <div class="modal-body">
-                <form action="/SendMessage" method="get">
-                    <div class="form-group">
-        
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-           
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea class="form-control" id="message" name="message" placeholder="Please type out your message here."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                         <button class="btn btn-primary btn-block" type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-               <p>Think of something</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- FOOTER CONTACT MODAL BEGINGS-->

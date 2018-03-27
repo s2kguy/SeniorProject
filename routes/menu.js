@@ -31,7 +31,7 @@ router.get('/add-to-cart/:id', function(req, res, next){
   MenuItem.findById(productId, function(err, menu_item){
 
     if(err) {
-      return res.redirect('/Menu/Category/Home');
+      res.redirect('/Menu/Category/Home');
     }
     cart.add(menu_item, menu_item.id);
     req.session.cart = cart;

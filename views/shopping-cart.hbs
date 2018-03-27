@@ -8,12 +8,20 @@
             <ul class="list-group">
                 {{#each products}}
                     <li class="list-group-item">
-                        <div>
-                        <strong>{{this.item.name}}</strong>
-                        <span class="badge">Qty: {{this.qty}}</span>
-                        <span class="label">${{this.price}}</span>
+                        <!--div>
+                            
+                                <span>{{this.item.name}}</span>
+                        </div-->
+                        <span>
+                                <span>{{this.item.name}}</span>
+                                <!--span class="badge">Qty: {{this.qty}}</span-->
+                                <span class="badge badge-primary badge-pill">{{this.qty}}</span>
+                                <span class="label">${{this.price}}</span>
+                            
+                        
                         <!--/div-->
                         <!--div class="bth-group"-->
+                       
                             <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
                                 Action
                                 <span class="carot"></span>
@@ -22,10 +30,9 @@
                                 <li>
                                 <a class="dropdown-item" href="/Menu/reduce/{{this.item._id}}">Reduce by 1</a>
                                 <a class="dropdown-item" href="/Menu/remove/{{this.item._id}}">Remove All</a>
-                             </li>
-                           
+                                </li>
                             </ul>
-                        </div>
+                        </span>
                     </li>
                 {{/each}}  
             </ul>
@@ -37,14 +44,11 @@
             <p>Sub Total: ${{subTotal}}</p>
             <p>Tax (10.5%): ${{tax}}</p>
             <strong>Total: ${{totalPrice}}</strong>
+            <a href="/Checkout" class="btn btn-secondary">Checkout</a>
+
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">
-            <button type="button" class="btn btn-success">Checkout</button>
-        </div>
-    </div>
 {{else}}
     <div class="row" id="spiritsContainer">
         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">

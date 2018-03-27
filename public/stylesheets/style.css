@@ -3,8 +3,10 @@ body {
      }
   
   footer{
-    background: #211F20;
-    color: #fff; }
+ 
+    color: #fff;
+   
+  }
   
   .navbar {
     border-bottom: #BA1E22 3px solid;
@@ -200,11 +202,21 @@ body {
 
   .list-group-item{
     padding: 4px;
-    width: 500px;
+    width: 225;
+    text-align: center;
 
   }
 
   .list-group-item button{
     float: right;
   }
+
+#cartItem{
+  width: 500px;
+}
+
+div.quickLink {
+ text-align: center;
+ padding: 0px 0px 0px 0px;
+}
 

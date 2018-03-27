@@ -3,14 +3,15 @@
  *************************/
 module.exports = function Cart(oldCart) { // receives old Cart
     // assign values of old cart to new cart
+    
     var taxRate = 0.105;
     this.items = oldCart.items || {};
-    this.totalQty = oldCart.totalQty || 0;
-    this.tax = oldCart.tax || 0;
-    this.subTotal = oldCart.subTotal || 0;
-    this.totalPrice = oldCart.totalPrice || 0;
+    this.totalQty = oldCart.totalQty || 0.00;
+    this.tax = oldCart.tax || 0.00;
+    this.subTotal = oldCart.subTotal || 0.00;
+    this.totalPrice = oldCart.totalPrice || 0.00;
    
-
+   // this.subTotal = format(this.subTotal);
      
     
     // ADD ITEM TO THE CART
@@ -28,7 +29,7 @@ module.exports = function Cart(oldCart) { // receives old Cart
         this.subTotal += storedItem.price;
         
         this.tax = taxRate*this.subTotal;
-        this.totalPrice = this.subTotal + this.tax;
+        this.totalPrice = format(this.subTotal + this.tax);
         console.log(Cart);
     };
     // REDUCE ITEM QUANTITY BY ONE
@@ -38,7 +39,7 @@ module.exports = function Cart(oldCart) { // receives old Cart
         this.totalQty--;
         this.subTotal -= this.items[id].item.price;
         this.tax = taxRate*this.subTotal;
-        this.totalPrice = this.subTotal + this.tax;
+        this.totalPrice = format(this.subTotal + this.tax);
         console.log(Cart);
         if(this.items[id].qty <= 0){
             delete this.items[id];
@@ -50,11 +51,11 @@ module.exports = function Cart(oldCart) { // receives old Cart
         this.totalQty -= this.items[id].qty;
         this.subTotal -= this.items[id].price;
         this.tax = taxRate * this.subTotal;
-        this.totalPrice = this.subTotal + this.tax;
+        this.totalPrice = format(this.subTotal + this.tax);
         console.log(this.subTotal);
         delete this.items[id];
        
-    }
+    };
     // RETURNS CART OBJECT AS ARRAY
     this.generateArray = function() {
         var arr = [];
@@ -62,10 +63,15 @@ module.exports = function Cart(oldCart) { // receives old Cart
             arr.push(this.items[id]);
         }
         return arr;
-    }; 
+    };
+    function format(x) {
+        return Number.parseFloat(x).toFixed(2);
+    }
 
-    this.tax = this.tax.toFixed(2);
-  //  this.subTotal = this.subTotal.toFixed(2);
-  //  this.totalPrice = this.totalPrice.toFixed(2); 
+ 
+    this.tax = format(this.tax);
+  //  this.subTotal = format(this.subTotal);
+  //  this.totalPrice = format(this.totalPrice);
+   
 
 };

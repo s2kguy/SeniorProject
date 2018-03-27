@@ -12,36 +12,11 @@ var nodemailer = require('nodemailer');
 var objectId = require('mongodb').ObjectID;
 
 var csrfProtection = csrf();
-
 router.use(csrfProtection);
 
-
-/**********************
- *  GUEST VIEW ROUTES *
- **********************/
-//  Landing Page
-router.get('/', notLoggedIn, function (req, res, next) {
-  res.render('index', { title: 'Wholly Smokin-Home' });
-});
-// Spirits 
-router.get('/Guests/Spirits', notLoggedIn, function (req, res, next) {
-  res.render('spiritsMenu', { title: 'Wholly Smokin-Spirits', layout: 'nLogInfoLayout', extname: '.hbs' });
-
-});
-// Events
-router.get('/Guests/Events', notLoggedIn, function (req, res, next) {
-  res.render('wsEvents', { title: 'Wholly Smokin-Events', layout: 'nLogInfoLayout', extname: '.hbs' });
-
-});
-// About Us
-router.get('/Guests/AboutUs', notLoggedIn, function (req, res, next) {
-  res.render('aboutUs', { title: 'Wholly Smokin-About Us', layout: 'nLogInfoLayout', extname: '.hbs' });
-
-});
-
-/****************************
- *  ACCOUNT CREATION ROUTES *
- ****************************/
+/*******************
+ *  ACCOUNT ROUTES *
+ *******************/
 router.get('/CreateAccount', notLoggedIn, function (req, res, next) {
   var messages = req.flash('error');
   res.render('createUser', {
@@ -56,6 +31,45 @@ router.post('/CreateAccount', passport.authenticate('local.signup', {
   failureFlash: true
 }));
 
+router.get('/Member/Sign-In', notLoggedIn, function (req, res, next) {
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  var messages = req.flash('error');
+  res.render('signIn', { title: 'Pork Store-Sign In', layout: 'nLogInfoLayout', extname: '.hbs', csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0 });
+});
+
+router.get('/Member/Profile', isLoggedIn, function (req, res, next) {
+  var messages = req.flash('error');
+  res.render('userProfile', { title: 'Wholly Smokin-User Profile', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
+});
+
+router.post('/Member/Sign-In', passport.authenticate('local.signin', {
+  successRedirect: '/Home',
+  failureRedirect: '/Member/Sign-In',
+  failureFlash: true
+}));
+
+router.get('/Delete/:id', isLoggedIn, function(req, res){
+  var id = req.params.id;
+  console.log(id);
+
+  User.deleteOne({'_id': id}, function(err, blah){
+    if(err){
+      res.redirect('/');
+    }else{
+      res.redirect('/Logout');
+    }
+  });
+
+});
+
+router.get('/Logout', function (req, res, next) {
+  req.logout();
+  res.redirect('/Home');
+});
+
+/****************************
+ *  PASSWORD RESET  ROUTES  *
+ ****************************/
 router.get('/ForgotPassword', notLoggedIn, function (req, res) {
   var messages = req.flash('error');
   console.log(req.session);
@@ -65,7 +79,6 @@ router.get('/ForgotPassword', notLoggedIn, function (req, res) {
   });
 });
 
-// FORGOT PASSWORD ROUTE
 router.post('/ForgotPassword', function (req, res, next) {
   async.waterfall([
     function (done) {
@@ -202,11 +215,7 @@ router.post('/reset/:token', function (req, res) {
   });
 });
 
-// ROUTE TO SEND AN EMAIL FROM THE FOOTER
-//
-//      Model id=contactModal
-//
-router.get('/SendMessage', function (req, res) {
+/*router.get('/SendMessage', function (req, res) {
   req.checkBody('name', 'Please enter your name.')
         .notEmpty().isLength({ min: 1 });
  console.log(req.params.name);
@@ -272,20 +281,32 @@ router.get('/SendMessage', function (req, res) {
   ], function (err) {
       res.redirect('/');
     });
- // console.log('Waterfall complete'); */
+ // console.log('Waterfall complete'); 
  res.redirect('/');
+}); */
+
+router.get('/SendMessage', function(req, res, next){
+  if (!req.isAuthenticated()) {
+    res.render('contactUs', { title: 'Contact Us', layout: 'nLogInfoLayout', extname: '.hbs', csrfToken: req.csrfToken() });
+  }
+  if (req.isAuthenticated()) {
+    res.render('contactUs', { title: 'Contact Us', user: req.user, layout: 'LogInfoLayout', extname: '.hbs', csrfToken: req.csrfToken() });
+  }
 });
-
-
 //   User will Click 
-router.post('/SendMessage', function(req, res){
+router.post('/SendMessage', function(req, res, next){
   async.waterfall([
 
     function (done) {
       // Get and Validate Form Values
       var name = req.body.name;
+      console.log(name);
       var email = req.body.email;
+      console.log(email);
       var message = req.body.message;
+      console.log(message);
+
+      
       req.checkBody('name', 'Please enter your name.')
         .notEmpty().isLength({ min: 1 });
       req.checkBody('email', 'Please enter an email address.')
@@ -293,13 +314,13 @@ router.post('/SendMessage', function(req, res){
       req.checkBody('message', 'Your message must contain at least 15 characters.')
         .notEmpty().isLength({ min: 15 });
       // Create an Object to pass
-      var userEmail = [name, email, message];
+      var userEmail = {name: name, email: email, message: message};
       // Return and Pass the Object
       return done(null, userEmail);
     },
     function (userEmail, done) {
       // Initialize the Email Service
-      let smtpTransport, mailOptions_Responce, mailOptions_User;
+      var smtpTransport, mailOptions_Responce, mailOptions_User;
       smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -314,13 +335,13 @@ router.post('/SendMessage', function(req, res){
         from: 'porkstoretestemail@gmail.com',
         subject: 'Thank you for your email!',
         text: 'Hello,\n\n' +
-          'This is a confirmation that the password for your account ' + userEmail.email + ' has just been changed.\n'
+          'We are thankful for your business, and will respond as soon as possible.  Have a great day!.\n'
       };
       mailOptions_User = {
         to: 'porkstoretestemail@gmail.com',
-        from: email,
-        subject: 'A message from ' + userEmail.name,
-        text: userEmail.message
+        from: userEmail.email,
+        subject: 'A message from ' + String(userEmail.name),
+        text: String(userEmail.message)
       };
       console.log('Email Objects Created');
       // Send the Emails
@@ -338,7 +359,7 @@ router.post('/SendMessage', function(req, res){
   ],
   function (err, success) {
     if (err) console.log('something went wrong');
-    res.redirect('/', { csrfToken: req.csrfToken()});
+    res.redirect('/Home');
   });
 });
 
@@ -347,82 +368,51 @@ router.post('/SendMessage', function(req, res){
  *  SIGN-IN VIEW ROUTES *
  ************************/
 
-router.get('/Member/Sign-In', notLoggedIn, function (req, res, next) {
-  var cart = new Cart(req.session.cart ? req.session.cart : {});
-  var messages = req.flash('error');
-  res.render('signIn', { title: 'Pork Store-Sign In', layout: 'nLogInfoLayout', extname: '.hbs', csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0 });
-});
 
 
-router.get('/Member/Profile', isLoggedIn, function (req, res, next) {
-  var messages = req.flash('error');
-  res.render('userProfile', { title: 'Wholly Smokin-User Profile', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
-});
-
-router.post('/Member/Sign-In', passport.authenticate('local.signin', {
-  successRedirect: '/Member/Home',
-  failureRedirect: '/Member/Sign-In',
-  failureFlash: true
-}));
-
-router.get('/Delete/:id', isLoggedIn, function(req, res){
-  let id = req.params.id;
-  console.log(id);
-
-  User.deleteOne({'_id': id}, function(err, blah){
-    if(err){
-      res.redirect('/');
-    }else{
-      res.redirect('/Logout');
-    }
-  });
-
-});
-
-router.get('/Logout', function (req, res, next) {
-  req.logout();
-  res.redirect('/');
-});
-
-
-//  Landing Page
-router.get('/Member/Home', isLoggedIn, function (req, res, next) {
-  res.render('index', { title: 'Wholly Smokin-Home', user: req.user, layout: 'LogHomeLayout', extname: '.hbs' });
-
-});
-// Spirits 
-router.get('/Member/Spirits', isLoggedIn, function (req, res, next) {
-  res.render('spiritsMenu', { title: 'Wholly Smokin-Spirits', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
-
-});
-// Events
-router.get('/Member/Events', isLoggedIn, function (req, res, next) {
-  res.render('wsEvents', { title: 'Wholly Smokin-Events', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
-
-});
-// About Us
-router.get('/Member/AboutUs', isLoggedIn, function (req, res, next) {
-  res.render('aboutUs', { title: 'Wholly Smokin-About Us', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
-
-});
-/**
- *  ALL ROUTES ARE TO BE REDUCED DOWN TO MATCH THE STYLE OF THE ROUTE BELOW
- */
-
-router.get('/Shopping-Cart', function (req, res, next) {
-  var cart = new Cart(req.session.cart ? req.session.cart : {});
+/****************
+ *  VIEW ROUTES *
+ ****************/
+//  Home Page
+router.get('/Home', function (req, res, next) {
   if (!req.isAuthenticated()) {
-    res.render('shopping-cart', { title: 'Wholly Smokin-Cart', products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'nLogInfoLayout', extname: '.hbs' });
+    res.render('index', { title: 'Wholly Smokin-Home' });
   }
   if (req.isAuthenticated()) {
-    res.render('shopping-cart', { title: 'Wholly Smokin-Cart', user: req.user, products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'LogInfoLayout', extname: '.hbs' });
+    res.render('index', { title: 'Wholly Smokin-Home', user: req.user, layout: 'LogHomeLayout', extname: '.hbs' });
+  }
+});
+// Spirits 
+router.get('/Spirits', function (req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.render('spiritsMenu', { title: 'Wholly Smokin-Spirits', layout: 'nLogInfoLayout', extname: '.hbs' });
+  }
+  if (req.isAuthenticated()) {
+    res.render('spiritsMenu', { title: 'Wholly Smokin-Spirits', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
+  }
+});
+// Events
+router.get('/Events', function (req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.render('wsEvents', { title: 'Wholly Smokin-Events', layout: 'nLogInfoLayout', extname: '.hbs' });
+  }
+  if (req.isAuthenticated()) {
+    res.render('wsEvents', { title: 'Wholly Smokin-Events', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
+  }
+});
+// About Us
+router.get('/AboutUs', function (req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.render('aboutUs', { title: 'Wholly Smokin-About Us', layout: 'nLogInfoLayout', extname: '.hbs' });
+  }
+  if (req.isAuthenticated()) {
+    res.render('aboutUs', { title: 'Wholly Smokin-About Us', user: req.user, layout: 'LogInfoLayout', extname: '.hbs' });
   }
 });
 
-/*********************
- *  MENU VIEW ROUTES *
- *********************/
-
+/***************************
+ *  MENU & SHOPPING ROUTES *
+ ***************************/
 router.get('/Menu/Home', function (req, res, next) {
   if (!req.isAuthenticated()) {
     res.render('menuHome', { title: 'Wholly Smokin-Menu', layout: 'nLogMenuLayout', extname: '.hbs' });
@@ -439,7 +429,7 @@ router.get('/Menu/Category/Home', function (req, res, next) {
     res.render('dineInHome', { title: 'Wholly Smokin-Menu', user: req.user, layout: 'LogMenuLayout', extname: '.hbs' });
   }
 });
-/* GET Menu listing. */
+
 router.get('/Menu/Category/Starters', function (req, res, next) {
   MenuItem.find({ itemCategory: 'Starters' }, function (err, docs) {
     // Splitting Menu Items into "chunks" to aid Item Card Population 
@@ -454,7 +444,7 @@ router.get('/Menu/Category/Starters', function (req, res, next) {
     } else {
       res.render('basicMenu', { title: 'Wholly Smokin-Menu', user: req.user, items: itemChunk, layout: 'LogMenuLayout', extname: '.hbs' });
     }
-  })
+  });
 });
 
 router.get('/Menu/Item/:id', function (req, res, next) {
@@ -490,11 +480,28 @@ router.get('/Menu/Category/Sandwich', function (req, res, next) {
     } else {
       res.render('basicMenu', { title: 'Wholly Smokin-Menu', user: req.user, items: itemChunk, layout: 'LogMenuLayout', extname: '.hbs' });
     }
-  })
+  });
+}); 
+
+router.get('/Shopping-Cart', function (req, res, next) {
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  if (!req.isAuthenticated()) {
+    res.render('shopping-cart', { title: 'Wholly Smokin-Cart', products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'nLogInfoLayout', extname: '.hbs' });
+  }
+  if (req.isAuthenticated()) {
+    res.render('shopping-cart', { title: 'Wholly Smokin-Cart', user: req.user, products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'LogInfoLayout', extname: '.hbs' });
+  }
 });
 
-
-
+router.get('/Checkout', function(req, res, next){
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  if (!req.isAuthenticated()) {
+    res.render('checkout', { title: 'Pork Store Checkout', products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'nLogInfoLayout', extname: '.hbs' });
+  }
+  if (req.isAuthenticated()) {
+    res.render('checkout', { title: 'Pork Store Checkout', user: req.user, products: cart.generateArray(), subTotal: cart.subTotal, tax: cart.tax, totalPrice: cart.totalPrice, layout: 'LogInfoLayout', extname: '.hbs' });
+  }
+});
 
 module.exports = router;
 
