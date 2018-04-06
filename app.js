@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var expressHBS = require('express-handlebars');
 var mongoose = require('mongoose');
 var MongoDB = require('mongodb');
+require('dotenv').config();
 var MongoClient = mongoose.MongoClient;
 var session = require('express-session');
 var passport = require('passport');
@@ -20,7 +21,7 @@ var nodemailer = require('nodemailer');
 var index = require('./routes/index');
 var menu = require('./routes/menu');
 var app = express();
-
+          // mongodb: +DB_CONNECTION_STRING
 mongoose.connect('mongodb://localhost:27017/porkStore', {
   useMongoClient: true
 });
@@ -54,7 +55,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//console.log(DB_CONNECTION_STRING);
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session; 

@@ -17,8 +17,11 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/Shopping-Cart">View Cart</a>
                         <a class="dropdown-item" href="#">View Order History</a>
-                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="/Member/Profile">View Profile</a>
                         <div class="dropdown-divider"></div>
+                         <form class="px-2 py-2" action="/Delete/{{user.id}}" method="get">
+                         <button type="submit" class="dropdown-item">Delete Account</button>
+                        </form>
                         <a class="dropdown-item" href="/Logout">Logout</a>
                     </div>
                 </li>

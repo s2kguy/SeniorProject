@@ -1,59 +1,89 @@
-<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-<div class="container" >
-    <h1 id="spiritsContainer">Shopping-Cart</h1>
 
-{{#if products}}
-    <div class="row" id="cartItem">
-        <!--div class="col-xs-5 col-sm-5 col-md-6 col-lg-5"-->
-            <ul class="list-group">
-                {{#each products}}
-                    <li class="list-group-item">
-                        <!--div>
-                            
-                                <span>{{this.item.name}}</span>
-                        </div-->
-                        <span>
-                                <span>{{this.item.name}}</span>
-                                <!--span class="badge">Qty: {{this.qty}}</span-->
-                                <span class="badge badge-primary badge-pill">{{this.qty}}</span>
-                                <span class="label">${{this.price}}</span>
-                            
-                        
-                        <!--/div-->
-                        <!--div class="bth-group"-->
-                       
-                            <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
-                                Action
-                                <span class="carot"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                <a class="dropdown-item" href="/Menu/reduce/{{this.item._id}}">Reduce by 1</a>
-                                <a class="dropdown-item" href="/Menu/remove/{{this.item._id}}">Remove All</a>
-                                </li>
-                            </ul>
-                        </span>
-                    </li>
-                {{/each}}  
-            </ul>
-        <!--/div-->
-    </div>
 
-    <div class="row" id="spiritsContainer">
-        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">
-            <p>Sub Total: ${{subTotal}}</p>
-            <p>Tax (10.5%): ${{tax}}</p>
-            <strong>Total: ${{totalPrice}}</strong>
-            <a href="/Checkout" class="btn btn-secondary">Checkout</a>
 
+
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="container">
+    <h1 id="spiritsContainer" style="text-align: center;">Shopping-Cart</h1>
+   
+
+    {{#if products}}
+        <ul>
+            {{#each products}}
+
+            <div class="checkout" style="align-content:center;">
+
+                <div class=" checkout_left">
+                    <span class="cartItemName">{{this.item.name}}</span>
+                    <span class="badge badge-primary badge-pill">QTY: {{this.qty}}</span>
+                    <span class="label">${{this.price}}</span>
+                    <button class="btn btn-primary btn-xs dropdown-toggle itemButton" type="button" data-toggle="dropdown" id="itemButton">
+                    Action
+                        <span class="carot"></span>
+                    </button>
+                     <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="/Menu/reduce/{{this.item._id}}">Reduce by 1</a>
+                            <a class="dropdown-item" href="/Menu/remove/{{this.item._id}}">Remove All</a>
+                        </li>
+                    </ul>
+                    
+                </div>      
+            
+                <div class="checkout_right">
+                    <span class="cartItemPlateOps">{{this.item.plateOps}}</span>
+                    <span class="cartItemSides">{{this.item.sides}}</span>
+                    <span class="cartItemSpec_Inst">{{this.item.spec_Inst}}</span>
+                </div>
+            </div>
+            
+        {{/each}}
+        </ul>
+        <div class="pricing">
+            <table class="pricing_table">
+                <tr>
+                    <td>Sub Total:</td>
+                    <td>${{subTotal}}</td>
+                </tr>
+                <tr>
+                    <td>Tax (10.5%):</td>
+                    <td>${{tax}}</td>
+                </tr>
+                <tr>
+                    <td>Total: </td>
+                    <td>${{totalPrice}}</td>
+                </tr>
+            </table>
+            
+            <div class="row pay_options">
+                <a href="/Checkout" class="btn btn-secondary">Pay with Cash</a>
+                <h5 class="or">or</h3>
+                <form action="/Checkout" method="post" id="checkout-form">
+                    <script <script src="https://checkout.stripe.com/checkout.js" class="stripe-button myStripBTN" data-key="pk_test_IhTExdjMLK1mYphZ5J4CO27E"
+                        data-amount="{{stripePrice}}" data-name="porkStore" data-description="Widget" 
+                        data-image="/images/wsLogo.jpg"
+                        data-locale="auto">
+                        </script>
+                    </script>
+                </form>
+            </div>
         </div>
-    </div>
-    <hr>
-{{else}}
-    <div class="row" id="spiritsContainer">
-        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-5">
-            <h2>No Items in Cart</h2>
+          
         </div>
-    </div>
+    
+
+<hr> {{else}}
+
+ <h2 id="spiritsContainer" style="text-align: center; padding-top: 20px; margin-bottom: 320px;">No Items in Cart</h2>
+
 {{/if}}
 </div>

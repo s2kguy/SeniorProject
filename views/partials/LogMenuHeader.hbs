@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-toggleable-md bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm navbar-toggleable-lg bg-dark navbar-dark fixed-top">
     <div class="container-fluid">
        
         <a class="navbar-brand" href="/Home">Wholly Smokin Downtown</a>
@@ -20,12 +20,13 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/Shopping-Cart">View Cart</a>
                         <a class="dropdown-item" href="#">View Order History</a>
-                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="/Member/Profile">Edit Profile</a>
+                        <div class="dropdown-divider"></div>
+
                          <form class="px-2 py-2" action="/Delete/{{user.id}}" method="get">
-                         <button type="submit" class="btn btn-primary">Delete Account</button>
+                         <button type="submit" class="dropdown-item">Delete Account</button>
                         </form>
                         <!--a class="dropdown-item" href="/Member/Delete/{{user._id}}">Delete Account</a-->
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Logout">Logout</a>
                     </div>
                 </li>

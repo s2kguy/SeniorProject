@@ -1,67 +1,195 @@
-    <div class="container-fluid">
-        <div class="row fixed-top">
-            <div class="col-md-12"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2 col-md-2 col-lg-2 fixed-top d-none d-sm-block">
-                <br/>
-                <br/>
-                <br/>
-                <!--CATEGORY MENU START-->
-                <div class="list-group">
-                    <h3>Categories</h3>
-                    <a href="/Menu/Category/Starters" class="list-group-item list-group-item-action">Starters</a>
-                    <a href="/Menu/Category/Salads" class="list-group-item list-group-item-action">Salads</a>
-                    <a href="/Menu/Category/Sandwich" class="list-group-item list-group-item-action">Sandwiches</a>
-                    <a href="/Menu/Category/Burgers" class="list-group-item list-group-item-action">Burgers</a>
-                    <a href="/Menu/Category/Baskets" class="list-group-item list-group-item-action">Baskets</a>
-                    <a href="/Menu/Category/Wraps" class="list-group-item list-group-item-action ">Wraps</a>
-                    <a href="/Menu/Category/Platters" class="list-group-item list-group-item-action ">Platters</a>
-                    <a href="/Menu/Category/Signature-Dinners" class="list-group-item list-group-item-action ">Signature Dinners</a>
-                    <a href="/Menu/Category/Sides" class="list-group-item list-group-item-action ">Sides</a>
-                    <a href="/Menu/Category/Kids-Menu" class="list-group-item list-group-item-action ">Children's Menu</a>
-                    <a href="/Menu/Category/Desserts" class="list-group-item list-group-item-action ">Desserts</a>
-                </div>
-                <!--CATEGORY MENU END-->
+
+
+
+<script type="text/javascript">
+    
+    function StandAloneSelected(prodID) {
+
+        console.log(prodID);
+        var sandO = document.getElementById('sandO'+prodID);
+        var specialInst = document.getElementById('specialInst'+prodID);
+        var sideItem = document.getElementById('side-options'+prodID);
+        var priceDiv = document.getElementById('priceDiv'+prodID);
+     //   var chxCookOption = document.getElementById('chxCookOp'+prodID);
+
+        sideItem.style.display = 'none';
+        specialInst.style.display = 'none';
+        priceDiv.style.display = 'none';
+     //   chxCookOption.style.display = 'none';
+        priceDiv.innerHTML = 'Sandwich Only Price'
+
+      //  chxCookOption.style.display = sandO.checked ? 'block' : 'none';
+        specialInst.style.display = sandO.checked ? 'block' : 'none';
+        priceDiv.style.display = sandO.checked ? 'block' : 'none';
+        var choice = document.getElementById('sandO'+prodID);
+        sandO.value = 'Sandwich Only';
+    
+        var x = document.getElementById('combO'+prodID);
+        x.value = prodID;
+        console.log('Sandwich Only Radio Button Clicked')
+        console.log('sandO: '+sandO.value);
+        console.log('combO: '+x.value);
+    }
+
+    function ComboSelected(prodID) {
+
+        var combO = document.getElementById('combO'+prodID);
+        var sideItem = document.getElementById('side-options'+prodID);
+        var specialInst = document.getElementById('specialInst'+prodID);
+        var priceDiv = document.getElementById('priceDiv'+prodID);
+     //   var chxCookOption = document.getElementById('chxCookOp'+prodID);
+
+        sideItem.style.display = 'none';
+        specialInst.style.display = 'none';
+        priceDiv.style.display = 'none';
+     //   chxCookOption.style.display = 'none';
+        priceDiv.innerHTML = 'Combo Price'
+
+        sideItem.style.display = combO.checked ? 'block' : 'none';
+        specialInst.style.display = combO.checked ? 'block' : 'none';
+     //   chxCookOption.style.display = combO.checked ? 'block' : 'none';
+        priceDiv.style.display = combO.checked ? 'block' : 'none';
+        combO.value = 'Combo';
+        var x = document.getElementById('sandO'+prodID);
+        x.value = prodID;
+        console.log('Combo Radio Button Clicked')
+        console.log('sandO: '+x.value);
+        console.log('combO: '+ combO.value);
+    }
+
+
+</script>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid fixed-top">
+        <div class="col-md-12"></div>
+    </div>
+
+    <div class="row">
+        <!--MENU CATEGORY COLUMN START-->
+        <div class="col-lg-2 col-xl-2 d-none d-lg-block">
+            <br/>
+            <br/>
+            <br/>
+            <!--CATEGORY MENU START-->
+            <div class="list-group category-menu">
+                <h3 class="list-group-item">Categories</h3>
+                <a href="/Menu/Category/Starters" class="list-group-item list-group-item-action">Starters</a>
+                <a href="/Menu/Category/Salads" class="list-group-item list-group-item-action">Salads</a>
+                <a href="/Menu/Category/Sandwich" class="list-group-item list-group-item-action">Sandwiches</a>
+                <a href="/Menu/Category/Burgers" class="list-group-item list-group-item-action">Burgers</a>
+                <a href="/Menu/Category/Baskets" class="list-group-item list-group-item-action">Baskets</a>
+                <a href="/Menu/Category/Wraps" class="list-group-item list-group-item-action ">Wraps</a>
+                <a href="/Menu/Category/Platters" class="list-group-item list-group-item-action ">Platters</a>
+                <a href="/Menu/Category/Signature-Dinners" class="list-group-item list-group-item-action ">Signature Dinners</a>
+                <a href="/Menu/Category/Sides" class="list-group-item list-group-item-action ">Sides</a>
+                <a href="/Menu/Category/Kids-Menu" class="list-group-item list-group-item-action ">Children's Menu</a>
+                <a href="/Menu/Category/Desserts" class="list-group-item list-group-item-action ">Desserts</a>
             </div>
-            <!--Adding Space between the Category Menu and Menu Items-->
-            <div class="col-sx-3 col-sm-3 col-md-2 col-lg-2"></div>
-          
-            <!--MENU OUT LAYOUT BEGIN-->
-            <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
-                <div class="row"></div>
-                <br/>
-                <br/>
-                <br/>
-                <!--DISPLAYING MENU ITEMS WITH BOOTSTRAP CARDS START-->
-                <!-- Outer Loop Row Control Begins-->
-                {{# each items}}
-                <div id="menu-row" class="row">
-                    <!-- Inner Loop Row Item Control Begins-->
-                    {{# each this}}
-                    <div class="col-xs-4 col-sm-5 col-md-4 col-lg-3 col-xl-3">
-                        <div class="card text-center cardStyle" id="itemCard">
-                            <!--a href={{{this.imgURL}}}>
-                                <img class="card-img-top" src='' style: "padding: 5px 5px 5px 5px">
-                            </a-->
-                            <div class="card-body">
-                                <p>{{this.name}}</p>
-                                <p>{{this.description}}.</p>
-                                <p>${{this.price}}</p>
-                                <a href="/Menu/add-to-cart/{{this._id}}" class="btn" role="button">Add to Cart</a> 
-                                <a href="/Menu/Item/{{this._id}}" class="btn" role="button">Customize</a> 
+            <!--CATEGORY MENU END-->
+        </div>
+        <!--MENU CATEGORY COLUMN END-->
+
+        <!--MENU OUT LAYOUT BEGIN-->
+        <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10 col-xl-10">
+            <br/>
+            <br/>
+            <br/>
+            <!--DISPLAYING MENU ITEMS WITH BOOTSTRAP CARDS START-->
+            <!-- Outer Loop Row Control Begins-->
+            {{# each items}}
+            <div id="menu-row" class="row">
+                <!-- Inner Loop Row Item Control Begins-->
+                {{# each this}}
+                <div class="flip-container col-xs-6 col-md-3 col-lg-5 col-xl-4" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flipper">
+                        <div class="card front" >
+                            <img src=" /images/appImageText.jpg " class="img-fluid ">
+                            <!--ITEM CARD START-->
+                            <div class="card-block ">
+                                <p class="item-title ">{{this.name}}</p>
+                                <p class="item-price ">${{this.price}}</p>
+                            </div>
+                              <a href="/Menu/Item/{{this._id}} " class="btn btn-success btn-card " role="submit">
+                                            <i class="fa fa-cart-plus "></i>
+                                        </a>
+                        </div>
+                        <div class="back">
+                            <div class="card">
+                                <div class="card-block">
+                                    <p class="item-description ">{{this.description}}</p>
+
+                                    
+                                    <!--form action="/Menu/add-to-cart/{{this._id}}" method="post"-->
+                                    <form action="/Menu/Category/Sandwich/{{this.id}}" method="post">
+                                    <!--form action="/Menu/Category/Sandwich/{{this._id}}"method="post">
+                                        <!--SANDWICH OPTIONS 1: SANDWICH ONLY or COMBO-->
+                                        <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" class="form-control" name="sandwichType" id="sandO{{this.id}}" value="{{this.id}}" autocomplete="off" onchange="StandAloneSelected(this.value);">Sandwich Only</label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" class="form-control" name="sandwichType" id="combO{{this.id}}" value="{{this.id}}" autocomplete="off" onchange="ComboSelected(this.value);">Combo</label>
+                                        </div>
+                                        <!--END-->
+
+                                        <!--CHICKEN SANDWICH OPTIONS: FRIED or GRILLED-->
+                                        <div class="btn-group btn-group-toggle form-group" id="chxCookOp{{this.id}}" data-toggle="buttons" style="display: none;">
+                                            <label class="btn btn-secondary">
+                                                <input class="form-control" type="radio" name="options" value="Grilled" autocomplete="off">Grilled
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input class="form-control" type="radio" name="options" value="Fried" autocomplete="off">Fried
+                                            </label>
+                                        </div>
+                                        <!--END-->
+
+                                        <!--SINGLE SIDE OPTION-->
+                                        <div class="form-group" id="side-options{{this.id}}" style="display: none;">
+                                            <select class="form-control form-control-small btn-secondary" name="side" id="choice">
+                                                <option disabled="" selected="selected">Select your Side</option>
+                                                <option>Spicy Mac and Cheese +$1.25</option>
+                                                <option>Ketchup</option>
+                                                <option>Relish</option>
+                                            </select>
+                                        </div>
+                                        <!--END-->
+
+                                        <!--SPECIAL INSTRUCTIONS OPTION-->
+                                        <div class="form-group" id="specialInst{{this.id}}" style="display: none;">
+                                            <input class="form-control" type="text" class="text" name="specInst" placeholder="Special Instructions">
+                                        </div>
+                                        <!--END-->
+
+                                        <!--PRICE DIV-->
+                                        <div id="priceDiv{{this.id}}" style="display: none;">
+                                            <h1>Price $xx.xx</h1>
+                                        </div>
+                                        <!--END-->
+                                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                                        <button type="submit" class="btn btn-success btn-card"><i class="fa fa-cart-plus "></i></button>
+                                        <!--a href="/Menu/add-to-cart/{{this._id}} " class="btn btn-success btn-card " role="submit">
+                                            <i class="fa fa-cart-plus "></i>
+                                        </a-->
+                                        <!--a href="/testItem/:id " class="btn btn-success btn-card " role="submit">
+                                            <i class="fa fa-cart-plus "></i>
+                                        </a-->
+                                    </form> 
+                                </div>
                             </div>
                         </div>
                     </div>
-                     {{/each}}
-                     <!-- Inner Loop Row Item Control Ends-->
                 </div>
-                {{/each}}
-                <!-- Outer Loop Row Control Ends-->
-                <!--DISPLAYING MENU ITEMS WITH BOOTSTRAP CARDS ENDS-->
+                {{/each}} {{/each}}
             </div>
-            <!--MENU OUT LAYOUT ENDS-->
+            
+            <!-- Inner Loop Row Item Control Ends-->
         </div>
+         <!--div class="col-lg-2 col-xl-1 d-none d-lg-block"></div-->
+        <!-- Outer Loop Row Control Ends-->
+        <!--DISPLAYING MENU ITEMS WITH BOOTSTRAP CARDS ENDS-->
     </div>
-    
 
+    <!--MENU OUT LAYOUT ENDS-->
+</div>

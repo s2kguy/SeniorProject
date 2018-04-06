@@ -1,67 +1,121 @@
+<script type="text/javascript">
+
+  function StandAloneSelected(prodID) {
+
+    console.log(prodID);
+    var sandO = document.getElementById('sandO' + prodID);
+    var specialInst = document.getElementById('specialInst' + prodID);
+    var sideItem = document.getElementById('side-options' + prodID);
+    var priceDiv = document.getElementById('priceDiv' + prodID);
+    var chxCookOption = document.getElementById('chxCookOp' + prodID);
+
+    sideItem.style.display = 'none';
+    specialInst.style.display = 'none';
+    priceDiv.style.display = 'none';
+    chxCookOption.style.display = 'none';
+    priceDiv.innerHTML = 'Sandwich Only Price'
+
+    chxCookOption.style.display = sandO.checked ? 'block' : 'none';
+    specialInst.style.display = sandO.checked ? 'block' : 'none';
+    priceDiv.style.display = sandO.checked ? 'block' : 'none';
+  }
+
+  function ComboSelected(prodID) {
+
+    var combO = document.getElementById('combO' + prodID);
+    var sideItem = document.getElementById('side-options' + prodID);
+    var specialInst = document.getElementById('specialInst' + prodID);
+    var priceDiv = document.getElementById('priceDiv' + prodID);
+    var chxCookOption = document.getElementById('chxCookOp' + prodID);
+
+    sideItem.style.display = 'none';
+    specialInst.style.display = 'none';
+    priceDiv.style.display = 'none';
+    chxCookOption.style.display = 'none';
+    priceDiv.innerHTML = 'Combo Price'
+
+    sideItem.style.display = combO.checked ? 'block' : 'none';
+    specialInst.style.display = combO.checked ? 'block' : 'none';
+    chxCookOption.style.display = combO.checked ? 'block' : 'none';
+    priceDiv.style.display = combO.checked ? 'block' : 'none';
+  }
 
 
-<hr><hr><hr><hr><hr><hr><hr><hr><hr>
+</script>
+<div class="row" style="height: 100px;"></div>
+<div class="container">
+<div class="row ">
+  <div class="col-md-4 col-lg-3 col-xl-4">
+    <div class="card">
+      <div class="card-block" style="background-color: chartreuse;">
+        <p class="item-description">{{item.description}}</p>
 
 
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<section id="customizeItemSection" class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3 col-xl-3">
-                <img src="{{item.imgURL}}" alt="" class="img-fluid mb-3">
-            </div>
-
-            <div class="col-xs-2 col-sm-8 col-md-6 col-lg-6 col-xl-6">
-                <div class="card text-white bg-dark mb-3" style="max-width: 40rem;">
-                    <div class="card-body">
-                        <form class="px-4 py-3" action="" method="post" id="spiritsContainer">
-                            
-                                <h1>{{item.name}}<h1>
-                                {{#if item.description}}
-                                    <h3>{{item.description}}</h3><
-                                {{/if}}
-                            
-                            {{#if item.options}}
-                                <div class="btn-group" data-toggle="buttons">
-                                   <!-- {{#each item.options}}-->
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="choice" value="sandOnly" id="choice-sandOnly"> 
-                                            {{this.title}}       ${{this.price}}
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="choice" value="sandOnly" id="choice-combo"> 
-                                            {{this.title}}       ${{this.price.toFixed(2)}}
-                                        </label>
-                                    <!--  {{/each}} -->
-                                 </div>
-                            {{/if}}
-                            <div class="reveal-if-active"  data-require-pair="#choice-combo">
-                                <select class="require-if-active">
-                                    <option selected>Select Side Item</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                            <!--input type="hidden" name="_csrf" value="{{csrfToken}}"-->
-
-                            <a href="" class="btn btn-secondary">Add to Cart</a>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3 col-xl-3">
-                <img src="" alt="" class="img-fluid mb-3 rounded-circle">
-            </div>
-        </div>
+        
+      </div>
     </div>
-</section>
+  </div>
+  <div class="col-md-4 col-lg-4 col-xl-4">
+    <div class="card">
+      <div class="card-block" >
+        <p class="item-description">{{item.description}}</p>
 
+
+        <form action="/Menu/add-to-cart/{{this._id}}" method="post">
+          <!--SANDWICH OPTIONS 1: SANDWICH ONLY or COMBO-->
+          <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
+            <label class="btn btn-secondary">
+              <input type="radio" class="form-control" name="sandwichType" id="sandO{{this.id}}" value="{{this.id}}" autocomplete="off"
+                onchange="StandAloneSelected(this.value);">Sandwich Only</label>
+            <label class="btn btn-secondary">
+              <input type="radio" class="form-control" name="sandwichType" id="combO{{this.id}}" value="{{this.id}}" autocomplete="off"
+                onchange="ComboSelected(this.value);">Combo</label>
+          </div>
+          <!--END-->
+
+          <!--CHICKEN SANDWICH OPTIONS: FRIED or GRILLED-->
+          <div class="btn-group btn-group-toggle form-group" id="chxCookOp" data-toggle="buttons" style="display: none;">
+            <label class="btn btn-secondary">
+              <input class="form-control" type="radio" name="options" value="Grilled" autocomplete="off">Grilled
+            </label>
+            <label class="btn btn-secondary">
+              <input class="form-control" type="radio" name="options" value="Fried" autocomplete="off">Fried
+            </label>
+          </div>
+          <!--END-->
+
+          <!--SINGLE SIDE OPTION-->
+          <div class="form-group" id="side-options" style="display: none;">
+            <select class="form-control form-control-small btn-secondary" id="choice">
+              <option disabled="" selected="selected">Select your Side</option>
+              <option>Mustard</option>
+              <option>Ketchup</option>
+              <option>Relish</option>
+            </select>
+          </div>
+          <!--END-->
+
+          <!--SPECIAL INSTRUCTIONS OPTION-->
+          <div class="form-group" id="specialInst" style="display: none;">
+            <input class="form-control" type="text" class="text" placeholder="Special Instructions">
+          </div>
+          <!--END-->
+
+          <!--PRICE DIV-->
+          <div id="priceDiv" style="display: none;">
+            <h1>Price $xx.xx</h1>
+          </div>
+          <!--END-->
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          <button type="submit" class="btn btn-success btn-card">
+            <i class="fa fa-cart-plus "></i>
+          </button>
+          <!--a href="/Menu/add-to-cart/{{this._id}} " class="btn btn-success btn-card " role="submit">
+         <i class="fa fa-cart-plus "></i>
+                                        </a-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

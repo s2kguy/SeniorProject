@@ -1,222 +1,490 @@
 body {
-    background: #211F20;
-     }
-  
-  footer{
- 
-    color: #fff;
-   
-  }
-  
-  .navbar {
-    border-bottom: #BA1E22 3px solid;
-    opacity: 0.8; }
-  
-  #home-section, #menuHome {
-    background: url("../images/home_section.jpg") no-repeat;
-    min-height: 700px;
-    background-size: cover;
-    background-attachment: fixed;
-    color: #fff; }
-    #home-section .dark-overlay {
-      background-color: rgba(0, 0, 0, 0.7);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      min-height: 700px; }
-    #home-section .home-inner {
-      padding-top: 150px; }
-    #home-section .fa {
-      color: #008ed6;
-      background: #fff;
-      padding: 4px;
-      border-radius: 5px;
-      font-size: 30px; }
-  
-  #menu-section .fa {
-      color: #fff;
-      background: #211F20;
-      padding: 4px;
-      border-radius: 5px;
-      font-size: 30px; }
-  
-  #menu-section {
-    background: url("../images/events-section 2.jpg") no-repeat;
-    min-height: 500px;
-    text-shadow: 2px 2px 4px #000000;
-    background-size: cover;
-    background-attachment: fixed; 
-    color: #fff;}
-  
-  #spirits-section .fa, #main-footer .fa  {
-    color: #fff;
-    background: #211F20;
-    padding: 4px;
-    border-radius: 5px;
-    font-size: 30px; }
-  
-    #spirits-section {
-      background: url("../images/bar-view.jpg") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
-  
-  #events-section .fa,  {
-    color: #fff;
-    background: white;
-    padding: 4px;
-    border-radius: 5px;
-    font-size: 30px; }
-  
-    #events-section {
-      background: url("../images/events_section_sample.jpg") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
-  
-  #about-section .fa,  {
-    color: white;
-    background: #211F20;
-    padding: 4px;
-    border-radius: 5px;
-    font-size: 30px; }
-  
-    #about-section {
-      background: url("../images/about_section_sample.jpeg") no-repeat;
-      min-height: 500px;
-      background-size: cover;
-      text-shadow: 2px 2px 4px #000000;
-      background-attachment: fixed; 
-      color: #fff;
-    }
-    #menu-head-section, #spirits-head-section, #events-head-section, #about-head-section{
-        color: #fff;
-    }
-    #spiritsContainer{
-        color: #fff;
-    }
+  background: #211F20;
+}
 
-    #liquor-head-section, #beer-head-section, #wine-head-section, #EventsFeatured-head-section{
-      color: #fff;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+footer {
+  color: #fff;
+  position: relative;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+}
 
-    }
+.navbar {
+  border-bottom: #BA1E22 3px solid;
+  opacity: 0.8;
+}
 
-    #liquor-section{
-      background: url("../images/bourbon2.jpg") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
+#home-section,
+#menuHome {
+  background: url("../images/home_section.jpg") no-repeat;
+  min-height: 700px;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
 
-    #beer-section{
-      background: url("../images/bwTaps.jpeg") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
+#home-section .dark-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 700px;
+}
 
-    #wine-section{
-      background: url("../images/redwine.jpg") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
+#home-section .home-inner {
+  padding-top: 150px;
+}
 
-    #featured-section{
-      background: url("../images/bar-view.jpg") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
+#home-section .fa {
+  color: #008ed6;
+  background: #fff;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px;
+}
 
-    #EventsFeatured-section{
-      background: url("../images/upcomingEventsBack.JPG") no-repeat;
-      min-height: 500px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
+#menu-section .fa {
+  color: #fff;
+  background: #211F20;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px;
+}
 
-    }
+#menu-section {
+  background: url("../images/events-section 2.jpg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
 
-    #EventsHeader-section{
-      background: url("../images/bar-view.jpg") no-repeat;
-      min-height: 400px;
-      text-shadow: 2px 2px 4px #000000;
-      background-size: cover;
-      background-attachment: fixed; 
-      color: #fff;
-    }
+#spirits-section .fa,
+#main-footer .fa {
+  color: #fff;
+  background: #211F20;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px;
+}
 
-    #carouselCard{
-      text-shadow: 2px 2px 4px #000000;
-      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1), 0 14px 20px 0 rgba(0, 0, 0, 0.0);
-      background: #211F20;
-    }
+#spirits-section {
+  background: url("../images/bar-view.jpg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
 
-    #carousel-inner{
-      box-shadow: 0 100px 20px 0 rgba(255, 255, 255, 0.1), 0 14px 20px 0 rgba(70, 63, 63, 0);
-    }
+#events-section .fa,
+  {
+  color: #fff;
+  background: white;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px;
+}
 
-    #Calendar-section{
-      min-height: 500px;
-      background: url("../images/bourbon2.jpg") no-repeat;
-    }
-  
-  #part1-head-section, #part2-head-section, #part3-head-section, #part4-head-section, #part5-head-section, #part6-head-section, #AboutHeader-section{
-    color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
+#events-section {
+  background: url("../images/events_section_sample.jpg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
 
-  #AB_Card{
-   
-   padding: 10px;
-    color: #fff;
-  }
+#about-section .fa,
+  {
+  color: white;
+  background: #211F20;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 30px;
+}
 
-  #part2-section, #part3-section, #part4-section, #part5-section, #part6-section{
-    background: url("../images/bar-view.jpg") no-repeat;
-    min-height: 400px;
-    text-shadow: 2px 2px 4px #000000;
-    background-size: cover;
-    background-attachment: fixed; 
-    color: #fff;
-  }
+#about-section {
+  background: url("../images/about_section_sample.jpeg") no-repeat;
+  min-height: 500px;
+  background-size: cover;
+  text-shadow: 2px 2px 4px #000000;
+  background-attachment: fixed;
+  color: #fff;
+}
 
+#menu-head-section,
+#spirits-head-section,
+#events-head-section,
+#about-head-section {
+  color: #fff;
+}
 
-  .list-group-item{
-    padding: 4px;
-    width: 225;
-    text-align: center;
+#spiritsContainer {
+  color: #fff;
+}
 
-  }
+#liquor-head-section,
+#beer-head-section,
+#wine-head-section,
+#EventsFeatured-head-section {
+  color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
-  .list-group-item button{
-    float: right;
-  }
+#liquor-section {
+  background: url("../images/bourbon2.jpg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
 
-#cartItem{
+#beer-section {
+  background: url("../images/bwTaps.jpeg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+#wine-section {
+  background: url("../images/redwine.jpg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+#featured-section {
+  background: url("../images/bar-view.jpg") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+#EventsFeatured-section {
+  background: url("../images/upcomingEventsBack.JPG") no-repeat;
+  min-height: 500px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+#EventsHeader-section {
+  background: url("../images/bar-view.jpg") no-repeat;
+  min-height: 400px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+#carouselCard {
+  text-shadow: 2px 2px 4px #000000;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1), 0 14px 20px 0 rgba(0, 0, 0, 0.0);
+  background: #211F20;
+}
+
+#carousel-inner {
+  box-shadow: 0 100px 20px 0 rgba(255, 255, 255, 0.1), 0 14px 20px 0 rgba(70, 63, 63, 0);
+}
+
+#Calendar-section {
+  min-height: 500px;
+  background: url("../images/bourbon2.jpg") no-repeat;
+}
+
+#part1-head-section,
+#part2-head-section,
+#part3-head-section,
+#part4-head-section,
+#part5-head-section,
+#part6-head-section,
+#AboutHeader-section {
+  color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#AB_Card {
+  padding: 10px;
+  color: #fff;
+}
+
+#part2-section,
+#part3-section,
+#part4-section,
+#part5-section,
+#part6-section {
+  background: url("../images/bar-view.jpg") no-repeat;
+  min-height: 400px;
+  text-shadow: 2px 2px 4px #000000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+.list-group-item {
+  padding: 4px;
+  width: 225;
+  text-align: center;
+}
+
+.list-group-item button {
+  float: right;
+}
+
+#cartItem {
   width: 500px;
 }
 
 div.quickLink {
- text-align: center;
- padding: 0px 0px 0px 0px;
+  text-align: center;
+  padding: 0px 0px 0px 0px;
+}
+p.card-text{
+  padding-bottom: 20px;
+}
+.card{
+  background-color: #fff;
+  border-radius: 0px;
+  width: 100%;
+  padding: 5px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 35px;
+}
+#menu-row{
+  padding: 0px 10px 45px 10px;
+  justify-content: space-around;
+  height: 400px;
 }
 
+
+.btn-card{
+  padding: 0px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  font-size: 30px;
+  background-color: #ddd;
+  color: #fff;
+  border: 5px solid #fff;
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  margin-left: -30px;
+  padding-bottom: 30px;
+  transition: background-color 1s;
+}
+
+.btn-card:hover {
+  background-color: #61cf94;
+  border-color: #fff;
+}
+
+div.checkout-header {
+  text-align: center;
+  color: #fff;
+  top: 500px;
+  padding: 100px 0px 0px 0px;
+}
+
+div#checkoutCard {
+  background-color: #fff;
+  padding: 20px 20px 20px 20px;
+  width: 85%;
+}
+
+div.orderSummary {
+  border: 1px solid black;
+  background-color: #fff;
+  width: 100%;
+}
+
+table.receipt-items {
+  text-align: center;
+  text-indent: 0.1rem;
+  padding-right: 20px;
+  width: 90%;
+}
+
+table.recPricing {
+  text-indent: 2rem;
+}
+
+.spacer {
+  width: 10%;
+}
+
+.spacer1 {
+  width: 5%;
+}
+
+.spacer1 {
+  width: 2.5%;
+}
+
+.spacer3 {
+  height: 13rem;
+}
+
+input#card-expiry-year,
+#card-expiry-month,
+#card-cvc {
+  width: 20%;
+}
+
+#checkoutRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.updateContainer{
+  margin-top: 100px;
+}
+
+
+
+.category-menu{
+  position: fixed;
+}
+
+.item-title{
+  font-size: 16px;
+}
+.item-description{
+  font-size: 10px;
+
+}
+.item-price{
+  font-size: 14px;
+}
+
+select#option-select{
+  border-radius: 10px;
+}
+
+select#option-select option{
+  border: 1px solid black;
+  background-color: #fff;
+  color: black;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+/*	 flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 300px;
+  height: 330px;
+  margin-bottom: 30px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+  position: relative;
+
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+/*  Cart Stuff */
+
+
+
+.cartItemName{
+  font-size: 16px;
+  float: left;
+  padding-right: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+
+
+.cartItemSides,.cartItemSpec_Inst{
+  font-size: 12px;
+
+
+}
+
+.checkout{
+  width: 500px;
+  height: 75;
+  background-color: #FFFF;
+  border: 1px solid black;
+  padding: 5px 5px;
+  
+  
+
+}
+.or{
+  padding: 0px 10px;
+}
+.pricing_table{
+  margin-left: 200px;
+}
+
+.pay_options{
+  margin-left: 145px;
+  padding-top: 20px;
+  margin-bottom: 150px;
+
+}
+.pricing{
+  color: white;
+}
+.similar{
+   padding: 0px 0px; 
+   margin-bottom: -5px;
+}
+.btn.btn-primary.btn-xs.dropdown-toggle{
+  padding: 2px 12px 2px 12px;
+  
+  
+}
+.checkout_left{
+  align-content: space-between;
+}
+.priceCol{
+  align-content: center;
+}

@@ -20,15 +20,23 @@ module.exports = function Cart(oldCart) { // receives old Cart
         var storedItem = this.items[id]; 
         // If this item does not exist in the cart, then create a new one
         if(!storedItem) { 
-            storedItem = this.items[id] = {item: item, qty: 0, price: 0.00};
+            storedItem = this.items[id] = {
+                item: item,
+             //   options: [],
+             //   sides:[], 
+                qty: 0, 
+                price: 0.00
+            };
         }
         // Update Item Quantity, Item Price with Quantity, Total Cart Quantity, and Total Cart Price
-        storedItem.qty++;                                           
+        storedItem.qty++;  
+        this.subTotal += storedItem.price;                                         
         storedItem.price = storedItem.item.price * storedItem.qty;
         this.totalQty++;
-        this.subTotal += storedItem.price;
+        
         
         this.tax = taxRate*this.subTotal;
+     //   this.subTotal = format(this.subTotal);
         this.totalPrice = format(this.subTotal + this.tax);
         console.log(Cart);
     };

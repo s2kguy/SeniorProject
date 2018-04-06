@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Cart = require('../models/cart');
+//var Cart = require('../models/cart');
+var Cart = require('../models/cart.1');
 var MenuItem = require('../models/menu_item');
 
 
@@ -26,8 +27,11 @@ router.get('/Category/Home', function(req, res, next) {
 router.get('/add-to-cart/:id', function(req, res, next){
   var productId = req.params.id;
   var productCat = req.params.itemCategory;
+  console.log('req.params: '+req.params.Object);
+  console.log('req.body: '+req.body);
   var cart = new Cart(req.session.cart ? req.session.cart : {});
-
+  console.log(cart);
+  
   MenuItem.findById(productId, function(err, menu_item){
 
     if(err) {

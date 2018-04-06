@@ -1,33 +1,70 @@
-<div>
-
+<div class="checkout-header">
+    <h1>Checkout</h1>
+    <hr>
 </div>
-
-
-<div class="card text-white bg-dark mb-3" style="max-width: 45rem;">
-    <div class="card-body">
-        <h4 class="card-title text-center">Payment Information</h4>
-        <form class="" action="/Checkout" method="post" id="spiritsContainer">
-            
-            <div class="form-group">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="card-name" name="card-name" placeholder="Name on Card">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="card-number" name="card-number" placeholder="Credit Card Number">
-            </div>
-            <div class="form-group" style="float:left">
-                <div class="row">
-                <input type="text" class="form-control" id="exp-month" name="exp-month" placeholder="Exp. Month (MM)">
-                <input type="text" class="form-control" id="exp-year" name="exp-year" placeholder="Exp. Year (YY)">
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="card-cvc" name="card-cvc" placeholder="CVC">
-            </div>
-            <!--input type="hidden" name="_csrf" value="{{csrfToken}}"-->
-            <a href="/Checkout" class="btn btn-secondary">Checkout</a>
-        </form>
+<div class="row row-flex" id="checkoutRow">
+    <div class="col-auto col-sm-1  col-md-1 col-lg-1 col-xl-3"></div>
+    <!--CHECKOUT RECEIPT BEGINS-->
+    <div class="col-auto col-sm-5 col-md-5 col-lg-5 col-xl-3">
+        <div class="orderSummary">
+            <h1 style="text-align: center;">Receipt</h1>
+            <br> {{#if products}}
+            <table class="receipt-items">
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+                {{#each products}}
+                <tr>
+                    <td> {{this.item.name}}</td>
+                    <td>{{this.qty}}</td>
+                    <td>${{this.price}}</td>
+                </tr>
+                {{/each}}
+            </table>
+            <table class="recPricing">
+                <tr>
+                    <td>--------------------</td>
+                </tr>
+                <tr>
+                    <th>Sub-Total:</th>
+                    <td>${{subTotal}}</td>
+                </tr>
+                <tr>
+                    <th>Tax (10.5%):</th>
+                    <td>${{tax}}</td>
+                </tr>
+                <tr>
+                    <th>Total:</th>
+                    <td>${{totalPrice}}</td>
+                </tr>
+            </table>
+            {{/if}}
+        </div>
     </div>
+    <!--CHECKOUT RECEIPT ENDS-->
+
+    <!--CHECKOUT FORM BEGINS-->
+    <div class="col-auto col-sm-5 col-md-5 col-lg-5 col-xl-3" id="checkoutCard">
+        <h3 style="text-align: center;">Credit Card Information</h1>
+            <form action="/Checkout" method="post" id="checkout-form">
+                <script <script 
+                            src="https://checkout.stripe.com/checkout.js" 
+                            class="stripe-button" 
+                            data-key="pk_test_IhTExdjMLK1mYphZ5J4CO27E"
+                            data-amount="{{stripeTotal}}" 
+                            data-name="porkStore" 
+                            data-description="Widget" 
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto">
+                    </script>
+                </script>
+            </form>
+    </div>
+    <div class="col-auto col-sm-1 col-md-1 col-lg-1 col-xl-3"></div>
 </div>
+<div class="spacer3">
+
+</div>
+<!--CHECKOUT FORM ENDS-->
