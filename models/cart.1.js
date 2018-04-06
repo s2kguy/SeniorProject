@@ -26,7 +26,7 @@
             for(var i = 0; i < this.totalQty; i++){
                 storedItem = this.items[i];
                 console.log('In cart with index: '+i+'? '+!storedItem);
-                if(storedItem.item.name == item.name && storedItem.item.plateOps == item.plateOps){
+                if(!storedItem||(storedItem.item.name == item.name && storedItem.item.plateOps == item.plateOps)){
                     break;
                 }
 
@@ -38,6 +38,7 @@
         // If not, then create the item
         if(!storedItem){
             console.log('A NEW ITEM HAS BEEN CREATED');
+            index=this.totalQty;
             storedItem = this.items[index] = {
                 item: item,
                 qty: 0, 
